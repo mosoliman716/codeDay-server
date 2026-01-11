@@ -32,7 +32,7 @@ const registerUser = async (req, res) => {
       sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
-    res.status(200).json({ message: "Registered successfully", token });
+    res.status(200).json({ message: "Registered successfully"});
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -59,7 +59,7 @@ const loginUser = async (req, res) => {
       sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
-    res.status(200).json({ message: "Login successful", token });
+    res.status(200).json({ message: "Login successful"});
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

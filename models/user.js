@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+const mongooseInstance = mongoose.connection.useDb("CodeDay");
+
+
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -13,6 +16,6 @@ const userSchema = new mongoose.Schema({
   created_at: { type: Date, default: Date.now },
 });
 
-const User = mongoose.model("consumers", userSchema);
+const User = mongooseInstance.model("Users", userSchema);
 
 export default User;
