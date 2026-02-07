@@ -5,6 +5,7 @@ import cors from "cors";
 import UserRoute from "./routes/userRoute.js";
 import ProblemRouter from "./routes/problemRoute.js";
 import ProjectRouter from "./routes/projectRoute.js";
+import TaskRouter from "./routes/taskRoute.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/users", UserRoute);
 app.use("/api/problems", ProblemRouter);
 app.use("/api/projects", ProjectRouter);
+app.use("/api/tasks", TaskRouter);
 
 
 app.listen(PORT, () => {
