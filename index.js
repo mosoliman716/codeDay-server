@@ -7,6 +7,7 @@ import ProblemRouter from "./routes/problemRoute.js";
 import ProjectRouter from "./routes/projectRoute.js";
 import TaskRouter from "./routes/taskRoute.js";
 import CourseRouter from "./routes/courseRoute.js";
+import CertificateRouter from "./routes/certificateRoute.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -30,6 +31,7 @@ app.use("/api/problems", ProblemRouter);
 app.use("/api/projects", ProjectRouter);
 app.use("/api/tasks", TaskRouter);
 app.use("/api/courses", CourseRouter);
+app.use("/api/certificates", CertificateRouter);
 
 
 app.listen(PORT, () => {
