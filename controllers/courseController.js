@@ -36,5 +36,27 @@ const getCourses = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+const deleteCourse = async (req, res) => {
+  const { _id: courseId } = req.body;
+  const userId = req.userId;
+  try {
+    if (!userId) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
 
-export { addCourse, getCourses };
+    const course = await Course.findOneAndDelete({
+      _id: courseId,
+      user_id: userId,
+    });
+
+    if (!course) {
+      return res.status(404).json({ message: "course not found" });
+    }
+
+    res.status(200).json({ message: "Course deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export { addCourse, getCourses, deleteCourse };
