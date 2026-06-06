@@ -2,6 +2,7 @@ import DBconnection from "./configs/db.js";
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import lusca from "lusca";
 import UserRoute from "./routes/userRoute.js";
 import ProblemRouter from "./routes/problemRoute.js";
 import ProjectRouter from "./routes/projectRoute.js";
@@ -13,6 +14,7 @@ import apiLimiter from "./middlewares/rateLimit.js";
 
 dotenv.config();
 const DB = await DBconnection();
+const csrfProtection = lusca.csrf();
 console.log("Using database:", DB.db.databaseName);
 
 
@@ -28,6 +30,7 @@ app.use(express.json());
 app.use(cookieParser()); // missing CSRF middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(apiLimiter);
+app.use(csrfProtection);
 
 app.use("/api/users", UserRoute);
 app.use("/api/problems", ProblemRouter);
