@@ -45,7 +45,7 @@ const deleteCourse = async (req, res) => {
     }
 
     const course = await Course.findOneAndDelete({
-      _id: courseId,
+      _id: { $eq: courseId },
       user_id: userId,
     });
 

@@ -9,6 +9,7 @@ import TaskRouter from "./routes/taskRoute.js";
 import CourseRouter from "./routes/courseRoute.js";
 import CertificateRouter from "./routes/certificateRoute.js";
 import cookieParser from "cookie-parser";
+import apiLimiter from "./middlewares/rateLimit.js";
 
 dotenv.config();
 const DB = await DBconnection();
@@ -22,9 +23,11 @@ app.use(cors({
     origin: "http://localhost:5173",
     credentials: true,
 }));
+
 app.use(express.json());
-app.use(cookieParser());
+app.use(cookieParser()); // missing CSRF middleware
 app.use(express.urlencoded({ extended: true }));
+app.use(apiLimiter);
 
 app.use("/api/users", UserRoute);
 app.use("/api/problems", ProblemRouter);

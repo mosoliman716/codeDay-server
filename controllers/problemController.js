@@ -51,7 +51,7 @@ const editProblem = async (req, res) => {
     if (!userId) {
       return res.status(401).json({ message: "Unauthorized" });
     }
-    const problem = await Problem.findOne({ _id: problemId, user_id: userId });
+    const problem = await Problem.findOne({ _id: { $eq: problemId }, user_id: userId });
     if (!problem) {
       console.log("Problem not found for editing:", problemId, userId);
       return res.status(404).json({ message: "Problem not found" });
@@ -78,12 +78,12 @@ const deleteProblem = async (req, res) => {
     }
 
     const problem = await Problem.findOneAndDelete({
-      _id: problemId,
+      _id: { $eq: problemId },
       user_id: userId,
     });
 
     if (!problem) {
-      return res.status(404).json({ message: "Project not found" });
+      return res.status(404).json({ message: "Problem not found" });
     }
 
     res.status(200).json({ message: "Problem deleted successfully" });
