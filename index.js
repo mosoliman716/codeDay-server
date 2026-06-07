@@ -25,7 +25,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
-app.use(cookieParser()); // missing CSRF middleware
+app.use(cookieParser()); // need req.session
 app.use(express.urlencoded({ extended: true }));
 app.use(apiLimiter);
 app.use(csrfProtection);
