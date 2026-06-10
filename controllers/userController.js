@@ -65,4 +65,19 @@ const loginUser = async (req, res) => {
   }
 };
 
-export { registerUser, loginUser };
+const getUser = async (req, res) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) {
+      res.status(401).json({ message: "no token" });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.userId).select("-password");
+    res.status(200).json({ user });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export { registerUser, loginUser, getUser };

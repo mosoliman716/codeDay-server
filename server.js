@@ -43,14 +43,14 @@ app.use(
 app.use(express.urlencoded({ extended: true }));
 app.use(apiLimiter);
 
-app.use(csrfProtection);
+ app.use(csrfProtection);
 
 app.get("/api/csrf-token", (req, res) => {
-  try {
-    res.json({ csrfToken: req.csrfToken() });
-  } catch (err) {
-    res.status(500).json({ message: "Failed to generate CSRF token" });
-  }
+    try {
+      res.json({ csrfToken: req.csrfToken() });
+    } catch (err) {
+      res.status(500).json({ message: "Failed to generate CSRF token" });
+    }
 });
 
 app.use("/api/users", UserRoute);
